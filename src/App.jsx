@@ -23,16 +23,18 @@ import Settings from './components/Settings';
 import FeedbackPage from './components/FeedbackPage';
 import BookAppointment from './components/Appointments';
 import TrainerAppointments from './components/TrainerAppointment';
-import.meta.env.VITE_SERVER_URL
 
-
+// ✅ Define API base URL from environment variable
+export const API_BASE = import.meta.env.VITE_SERVER_URL;
 
 function App() {
   return (
     <Router>
-      {/* Main Content of the Homepage */}
       <Routes>
-        <Route path="/" element={
+        {/* Home Page */}
+        <Route
+          path="/"
+          element={
             <div
               style={{
                 backgroundColor: '#FFC5D3',
@@ -42,6 +44,7 @@ function App() {
                 paddingTop: '25px',
               }}
             >
+              {/* Login Button */}
               <Link to="/login">
                 <Button
                   type="button"
@@ -57,13 +60,19 @@ function App() {
                   Login
                 </Button>
               </Link>
+
               <h1 className="mb-4 mt-3 text-white">Happy Fitness</h1>
 
               <div className="row">
                 <div className="col-12 col-lg-6 order-1 order-lg-0">
                   <h3 className="mb-4">#nutrition tracking</h3>
-                  <h1 className="mb-4">Nutrition track the easy way, for real life.</h1>
-                  <p>Track your food, exercise, and calories effortlessly—all in one place!</p>
+                  <h1 className="mb-4">
+                    Nutrition track the easy way, for real life.
+                  </h1>
+                  <p>
+                    Track your food, exercise, and calories effortlessly—all in
+                    one place!
+                  </p>
                 </div>
 
                 {/* Image Section */}
@@ -75,6 +84,7 @@ function App() {
                   />
                 </div>
               </div>
+
               <div className="mt-4">
                 <Link to="/welcomePage">
                   <button type="button" className="btn btn-light w-25">
@@ -82,48 +92,52 @@ function App() {
                   </button>
                 </Link>
               </div>
-              <div style={{marginTop:'20px'}}>
-              <Link to="/signup?type=admin" style={{color:'black'}}>Admin Signup</Link>
-              </div>      
+
+              {/* Admin Signup */}
+              <div style={{ marginTop: '20px' }}>
+                <Link to="/signup?type=admin" style={{ color: 'black' }}>
+                  Admin Signup
+                </Link>
               </div>
+            </div>
           }
         />
 
-        {/* Login Page Route */}
+        {/* Routes */}
         <Route path="/login" element={<LoginPage />} />
-
-        {/* Welcome Page Route */}
         <Route path="/welcomePage" element={<WelcomePage />} />
-        <Route path="/AdminDashboard" element={<AdminDashboard/>}/>
-        <Route path="/details" element={<PersonalDetails/>}/>
-        <Route path="/bmi" element={<BMICalculator/>}/>
-        <Route path="/weightlog" element={<DailyWeight/>}/>
-        <Route path='/reports' element={<WeightReport/>}/>
-        <Route path='/healthReport' element={<HeathReport/>}/>
-        <Route path='/weightMaintainExercises' element={<WeightMaintainExercise/>}/>
-        <Route path='/weightGainExercises' element={<WeightGainExercise/>}/>
-        <Route path='/weightLossExercises' element={<WeightLossExercise/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/trainerDashboard' element={<TrainerDashboard/>}/>
-        <Route path='/adminpanel' element={<AdminPanel/>}/>
-        <Route path='/reportpage' element={<ReportPage/>}/>
-        <Route path='/settings' element={<Settings/>}/>
-        <Route path='/feedback' element={<FeedbackPage/>}/>
-        <Route path='/appointment' element={<BookAppointment/>}/>
-        <Route path='/getappointments' element={<TrainerAppointments/>}/>
-
+        <Route path="/AdminDashboard" element={<AdminDashboard />} />
+        <Route path="/details" element={<PersonalDetails />} />
+        <Route path="/bmi" element={<BMICalculator />} />
+        <Route path="/weightlog" element={<DailyWeight />} />
+        <Route path="/reports" element={<WeightReport />} />
+        <Route path="/healthReport" element={<HeathReport />} />
+        <Route path="/weightMaintainExercises" element={<WeightMaintainExercise />} />
+        <Route path="/weightGainExercises" element={<WeightGainExercise />} />
+        <Route path="/weightLossExercises" element={<WeightLossExercise />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/trainerDashboard" element={<TrainerDashboard />} />
+        <Route path="/adminpanel" element={<AdminPanel />} />
+        <Route path="/reportpage" element={<ReportPage />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/feedback" element={<FeedbackPage />} />
+        <Route path="/appointment" element={<BookAppointment />} />
+        <Route path="/getappointments" element={<TrainerAppointments />} />
         <Route path="/signup" element={<SignupHandler />} />
       </Routes>
     </Router>
   );
 }
 
+/**
+ * ✅ Handles signup query param (admin/trainer)
+ */
 function SignupHandler() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const type = queryParams.get('type');
 
-  return type === 'trainer' ? <AddTrainer /> : <AdminSignup/>;
+  return type === 'trainer' ? <AddTrainer /> : <AdminSignup />;
 }
 
 export default App;
