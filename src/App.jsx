@@ -31,7 +31,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Home Page */}
         <Route
           path="/"
           element={
@@ -44,7 +43,6 @@ function App() {
                 paddingTop: '25px',
               }}
             >
-              {/* Login Button */}
               <Link to="/login">
                 <Button
                   type="button"
